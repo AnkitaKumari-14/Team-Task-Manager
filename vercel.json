@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "framework": null,
+  "buildCommand": "npm run build:frontend",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install --legacy-peer-deps && cd frontend && npm install --legacy-peer-deps && cd ../backend && npm install --legacy-peer-deps",
+  "env": {
+    "VITE_API_URL": "https://$VERCEL_PROJECT_PRODUCTION_URL/api",
+    "MONGODB_URI": "@mongodb_uri",
+    "JWT_SECRET": "@jwt_secret",
+    "JWT_EXPIRE": "@jwt_expire",
+    "COOKIE_EXPIRE": "@cookie_expire",
+    "SMTP_SERVICE": "@smtp_service",
+    "SMTP_MAIL": "@smtp_mail",
+    "SMTP_PASSWORD": "@smtp_password",
+    "CLOUDINARY_NAME": "@cloudinary_name",
+    "CLOUDINARY_API_KEY": "@cloudinary_api_key",
+    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret",
+    "FRONTEND_URL": "https://$VERCEL_PROJECT_PRODUCTION_URL"
+  },
+  "regions": ["iad1"],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
